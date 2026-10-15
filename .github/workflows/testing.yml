@@ -13,6 +13,7 @@ on:
         options:
           - all
           - week_01
+          - week_02
 
 jobs:
   test:
