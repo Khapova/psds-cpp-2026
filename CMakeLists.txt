@@ -25,7 +25,7 @@ endfunction()
 add_executable(psds_cpp main.cpp)
 
 add_week(week_01)
-#add_week(week_02)
+add_week(week_02)
 #add_week(week_03)
 #add_week(week_04)
 #add_week(week_05)
