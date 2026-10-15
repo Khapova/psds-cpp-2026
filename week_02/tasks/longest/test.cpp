@@ -175,7 +175,7 @@ TEST(LongestSubsequenceTest, LongString) {
     EXPECT_EQ(result, str.data() + 15);
 }
 
-TEST(LongestSubsequenceTest, ConstCorrectnes) {
+TEST(LongestSubsequenceTest, ConstCorrectness) {
     const std::string str = "aaabbbccc";
     size_t count = 0;
 
@@ -193,7 +193,7 @@ TEST(LongestSubsequenceTest, MixedTwoCharSequence) {
     const char* result = FindLongestSubsequence(str.data(), str.data() + str.size(), count);
     
     ASSERT_NE(result, nullptr);
-    EXPECT_EQ(count, 2); // "xxxx" в начале
+    EXPECT_EQ(count, 2); // первая "xx"
     EXPECT_EQ(*result, 'x');
     EXPECT_EQ(result, str.data() + 2);
 }

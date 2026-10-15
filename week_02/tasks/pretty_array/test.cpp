@@ -105,13 +105,13 @@ TEST_F(PrintArrayTest, LimitEqualToArraySize) {
 
 TEST_F(PrintArrayTest, ReverseRange) {
     int arr[] = {1, 2, 3};
-    PrintArray(arr + 2, arr - 1);
+    PrintArray(arr + 3, arr);
     EXPECT_EQ(GetOutput(), "[3, 2, 1]\n");
 }
 
 TEST_F(PrintArrayTest, ReverseRangeWithLimit) {
     int arr[] = {1, 2, 3, 4, 5};
-    PrintArray(arr + 4, arr - 1, 3);
+    PrintArray(arr + 5, arr, 3);
     EXPECT_EQ(GetOutput(), "[5, 4, 3, ...\n 2, 1]\n");
 }
 

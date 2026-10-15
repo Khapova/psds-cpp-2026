@@ -8,24 +8,10 @@
 namespace fs = std::filesystem;
 
 fs::path FindSourceCode() {
-    std::vector<fs::path> search_paths = {
-        "02_week/tasks/swap_ptr/swap_ptr.cpp",
-        "tasks/swap_ptr/swap_ptr.cpp",
-        "swap_ptr/swap_ptr.cpp",
-        "swap_ptr.cpp",
-        "tasks/swap_ptr.cpp"
-    };
-
-    for (const auto& path : search_paths) {
-        if (fs::exists(path) && fs::is_regular_file(path)) {
-            return fs::absolute(path);
-        }
-    }
-
-    return {};
+    return fs::path(__FILE__).parent_path() / "swap_ptr.cpp";;
 }
 
-TEST(CodeInspectionTest, NoBitsetInCode) {
+TEST(CodeInspectionTest, NoSwapInCode) {
     fs::path code_path = FindSourceCode();
     std::ifstream file(code_path);
     std::string content((std::istreambuf_iterator<char>(file)),
