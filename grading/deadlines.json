@@ -1,4 +1,34 @@
 {
+  "week_02": {
+    "deadline": "2026-10-23 23:59",
+    "tasks": {
+      "swap_ptr": {
+        "max_score": 100,
+        "description": "Обмен указателей"
+      },
+      "func_array": {
+        "max_score": 100,
+        "description": "Массив функций"
+      },
+      "longest": {
+        "max_score": 200,
+        "description": "Найти самую длинную подпоследовательность"
+      },
+      "last_of_us": {
+        "max_score": 200,
+        "description": "Найти последний элемент удовлетворяющий условию"
+      },
+      "little_big": {
+        "max_score": 200,
+        "description": "Представление числа в памяти"
+      },
+      "pretty_array": {
+        "max_score": 200,
+        "description": "Форматированный вывод массива"
+      }
+    }
+  },
+
   "week_01": {
     "deadline": "2026-10-16 23:59",
     "tasks": {
