@@ -48,7 +48,7 @@ void const_cast_pointers() {
     std::cout << "value after modification: " << value << std::endl;
     std::cout << std::endl;
 
-    const int* new_const_ptr = const_cast<const int*>(mutable_ptr);
+    [[maybe_unused]] const int* new_const_ptr = const_cast<const int*>(mutable_ptr);
     // *new_const_ptr = 300; // compile error
 
     std::cout << "UB: " << std::endl;
