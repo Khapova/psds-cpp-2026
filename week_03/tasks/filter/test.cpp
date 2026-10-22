@@ -80,7 +80,7 @@ TEST(FilterTest, NotSortedElements) {
     EXPECT_EQ(vec, expected);
 }
 
-TEST(FilterTest, NotRealocate) {
+TEST(FilterTest, NotReallocate) {
     std::vector<int> vec = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
     auto capacity = vec.capacity();
     auto ptr_before = vec.data();
@@ -131,12 +131,13 @@ TEST(FilterTest, BigRandomDataMultipleSeeds) {
     const int MIN_VALUE = -1'000'000;
     const int MAX_VALUE = 1'000'000;
 
-    std::random_device rd;
-    std::mt19937 seed_gen(rd());
+    // std::random_device rd;
+    std::mt19937 seed_gen(18);
     std::uniform_int_distribution<unsigned> seed_dist(0, 100000);
 
-    double erase_duration = 0;
-    double filter_duration = 0;
+    using clock = std::chrono::steady_clock;
+    clock::duration erase_duration{};
+    clock::duration filter_duration{};
     for (size_t test_idx = 0; test_idx < NUM_TESTS; ++test_idx) {
         unsigned int seed = seed_dist(seed_gen);
         std::mt19937 gen(seed);
@@ -148,15 +149,15 @@ TEST(FilterTest, BigRandomDataMultipleSeeds) {
         }
 
         auto expected = test;
-        auto start = std::chrono::high_resolution_clock::now();
+        auto start = clock::now();
         std::erase_if(expected, IsOdd);
-        auto end = std::chrono::high_resolution_clock::now();
-        erase_duration += std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
+        auto end = clock::now();
+        erase_duration += end - start;
 
-        start = std::chrono::high_resolution_clock::now();
+        start = clock::now();
         Filter(test, IsEven);
-        end = std::chrono::high_resolution_clock::now();
-        filter_duration += std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
+        end = clock::now();
+        filter_duration += end - start;
 
         ASSERT_EQ(test.size(), expected.size())
             << "Test #" << test_idx << " with seed " << seed
@@ -165,8 +166,10 @@ TEST(FilterTest, BigRandomDataMultipleSeeds) {
             << "Test #" << test_idx << " with seed " << seed
             << ": content mismatch";
     }
-
-    EXPECT_LE(filter_duration, 1.2 * erase_duration)
+    using std::chrono::duration_cast;
+    using std::chrono::microseconds;
+    EXPECT_LE(filter_duration.count(), 1.2 * erase_duration.count())
         << "Function too slow: "
-        <<"filter_duration = " << filter_duration << " ms, erase_duration = " << erase_duration << " ms\n";
+        << "filter_duration = " << duration_cast<microseconds>(filter_duration).count() << " us, "
+        << "erase_duration = " << duration_cast<microseconds>(erase_duration).count() << " us\n";
 }
