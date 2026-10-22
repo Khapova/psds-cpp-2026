@@ -91,22 +91,23 @@ TEST(MinMaxTest, MixedPositiveNegative) {
 }
 
 TEST(MinMaxTest, LargeVector) {
-    std::vector<int> vec(1000);
+    const int SIZE = 1000;
+    std::vector<int> vec(SIZE);
 
-    int value = -vec.size() / 2;
+    int value = -SIZE / 2;
     for (size_t i = 0; i < vec.size(); ++i, ++value) {
         vec[i] = value;
     }
 
-    vec[500] = -vec.size();
-    vec[750] = vec.size();
+    vec[500] = -SIZE;
+    vec[750] = SIZE;
 
     auto [min_it, max_it] = MinMax(vec);
 
     EXPECT_EQ(min_it, vec.begin() + 500);
     EXPECT_EQ(max_it, vec.begin() + 750);
-    EXPECT_EQ(*min_it, -vec.size());
-    EXPECT_EQ(*max_it, vec.size());
+    EXPECT_EQ(*min_it, -SIZE);
+    EXPECT_EQ(*max_it, SIZE);
 }
 
 TEST(MinMaxTest, ConstCorrectness) {
@@ -120,22 +121,31 @@ TEST(MinMaxTest, ConstCorrectness) {
 TEST(MinMaxTest, PerformanceCheck) {
     const double THRESHOLD = 0.3;
     const size_t SIZE = 1'000'000u;
+    const int RUNS = 5;
     std::vector<int> large_vec(SIZE);
     std::iota(large_vec.begin(), large_vec.end(), 0);
     std::shuffle(large_vec.begin(), large_vec.end(), std::mt19937{18});
 
-    auto start = std::chrono::high_resolution_clock::now();
-    auto [min_it, max_it] = MinMax(large_vec);
-    auto end = std::chrono::high_resolution_clock::now();
-    auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
+    using clock = std::chrono::steady_clock;
+    auto duration = clock::duration::max();
+    auto duration_std = clock::duration::max();
 
-    start = std::chrono::high_resolution_clock::now();
-    auto [min_it_std, max_it_std] = std::minmax_element(large_vec.begin(), large_vec.end());
-    end = std::chrono::high_resolution_clock::now();
-    auto duration_std = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
+    for (int run = 0; run < RUNS; ++run) {
+        auto start = clock::now();
+        auto [min_it, max_it] = MinMax(large_vec);
+        auto end = clock::now();
+        duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
+
+        start = clock::now();
+        auto [min_it_std, max_it_std] = std::minmax_element(large_vec.begin(), large_vec.end());
+        end = clock::now();
+        duration_std = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
+
+        EXPECT_EQ(*min_it, *min_it_std);
+        EXPECT_EQ(*max_it, *max_it_std);
+    }
 
     EXPECT_LE(std::abs(duration_std.count() - duration.count()) * 1.0, duration_std.count() * THRESHOLD) <<
         "Your function is very slowly";
-    EXPECT_EQ(*min_it, *min_it_std);
-    EXPECT_EQ(*max_it, *max_it_std);
+
 }
