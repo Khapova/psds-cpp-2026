@@ -54,7 +54,7 @@ TEST(CircleTest, CircleCreation) {
         EXPECT_EQ(circle.radius, 5u);
     }
     {
-        Circle circle({-5, 7});
+        Circle circle(Coord2D{-5, 7});
         EXPECT_EQ(circle.coord.x, -5);
         EXPECT_EQ(circle.coord.y, 7);
         EXPECT_EQ(circle.radius, 1u);
@@ -100,7 +100,7 @@ TEST(CircleTest, OutputOperator) {
 
 TEST(CircleRegionTest, CreateAndOutput) {
     {
-        Circle circle({3, 4});
+        Circle circle(Coord2D{3, 4});
         CircleRegion region(circle, true);
         std::ostringstream oss;
         oss << region;
@@ -170,7 +170,7 @@ TEST(CircleRegionListTest, VariousCombinations) {
     CircleRegionList list;
 
     // Добавляем разные комбинации
-    list.emplace_back(Circle({0, 0}), true);
+    list.emplace_back(Circle(Coord2D{0, 0}), true);
     list.emplace_back(Circle(Coord2D(5, 5), 10), false);
     list.emplace_back(Circle(Coord2D(-10, -10), 0), true);
     list.emplace_back(Circle(Coord2D(100, 200), 50), true);
