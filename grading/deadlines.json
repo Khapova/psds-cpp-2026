@@ -1,4 +1,46 @@
 {
+  "week_03": {
+    "deadline": "2026-10-30 23:59",
+    "tasks": {
+      "data_stats": {
+        "max_score": 100,
+        "description": "Статистика данных"
+      },
+      "unique": {
+        "max_score": 100,
+        "description": "Уникальные элементы"
+      },
+      "range": {
+        "max_score": 100,
+        "description": "Диапазон элементов"
+      },
+      "minmax": {
+        "max_score": 100,
+        "description": "Минимум и максимум"
+      },
+      "find_all": {
+        "max_score": 100,
+        "description": "Найти все элементы"
+      },
+      "os_overload": {
+        "max_score": 100,
+        "description": "Перегрузка оператора вывода"
+      },
+      "easy_compare": {
+        "max_score": 100,
+        "description": "Оператор сравнения"
+      },
+      "filter": {
+        "max_score": 100,
+        "description": "Фильтрация данных"
+      },
+      "enum_operators": {
+        "max_score": 200,
+        "description": "Переопределение побитовых операторов"
+      }
+    }
+  },
+
   "week_02": {
     "deadline": "2026-10-23 23:59",
     "tasks": {
@@ -16,7 +58,7 @@
       },
       "last_of_us": {
         "max_score": 200,
-        "description": "Найти последний элемент, удовлетворяющий условию"
+        "description": "Найти последний элемент удовлетворяющий условию"
       },
       "little_big": {
         "max_score": 200,
