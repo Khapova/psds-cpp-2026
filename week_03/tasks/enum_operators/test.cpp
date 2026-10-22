@@ -168,10 +168,8 @@ TEST(EnumOperatorsTest, Sanitization) {
 
     CheckFlags xor_result = flags_with_invalid ^ CheckFlags::ALL;
     EXPECT_EQ(xor_result, CheckFlags::NONE);
-    std::cerr << flags_with_invalid << std::endl;
 
     CheckFlags not_result = ~flags_with_invalid;
-    std::cerr << not_result << std::endl;
     EXPECT_EQ(not_result, CheckFlags::NONE);
 }
 

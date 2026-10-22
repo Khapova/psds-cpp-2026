@@ -1,5 +1,6 @@
 #include <stdexcept>
-#include <vector>
+#include <cstdint>
+
 
 enum class CheckFlags : uint8_t {
     NONE = 0,
