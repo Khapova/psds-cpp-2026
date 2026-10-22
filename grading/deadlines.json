@@ -28,7 +28,7 @@
       },
       "easy_compare": {
         "max_score": 100,
-        "description": "Оператор сравнения"
+        "description": "Операторы сравнения"
       },
       "filter": {
         "max_score": 100,
