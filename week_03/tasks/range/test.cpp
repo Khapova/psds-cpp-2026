@@ -89,7 +89,7 @@ TEST(RangePerformanceTest, LargeRange) {
     EXPECT_EQ(result_desc.front(), to - 1);
     EXPECT_EQ(result_desc.back(), from);
 
-    for (size_t i = 0; i < result_asc.size(); ++i) {
+    for (size_t i = 0; i < result_desc.size(); ++i) {
         EXPECT_EQ(result_desc[i], to - 1 - static_cast<int>(i));
     }
 
